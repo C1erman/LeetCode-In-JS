@@ -17,13 +17,10 @@ You may assume that each input would have **exactly** one solution, and you may 
 > 你不能重复利用这个数组中同样的元素。
 
 通过双重循环，便可以消除上述问题。
-$$
-时间复杂度O(n^2)
-$$
 
-$$
-空间复杂度O(1)
-$$
+时间复杂度为O(n^2)
+
+空间复杂度为O(1)
 
 对于每个元素，试图通过遍历数组的其部分来寻找它。
 
@@ -92,13 +89,9 @@ var twoSum = function(nums, target) {
 };
 ```
 
-$$
-时间复杂度O(n)
-$$
+时间复杂度为O(n)
 
-$$
-空间复杂度O(n)
-$$
+空间复杂度为O(n)
 
 Runtime:  **60 ms**
 
@@ -127,13 +120,9 @@ var twoSum = function(nums, target) {
     }
 };
 ```
-$$
-时间复杂度O(n)
-$$
+时间复杂度为O(n)
 
-$$
-空间复杂度O(n)
-$$
+空间复杂度O为(n)
 
 Runtime:  **60 ms**
 
