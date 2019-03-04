@@ -3,5 +3,7 @@
 
 算法小白，用Javascript实现。
 
+我好白痴哇。
+
 ![跑啊](https://raw.githubusercontent.com/C1erman/Graph-bed/master/imgs/1st/one1.jpg)
 
