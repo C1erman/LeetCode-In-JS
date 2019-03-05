@@ -22,8 +22,6 @@ You may assume the two numbers do not contain any leading zero, except the numbe
 
 ## 思路
 
-题外话：今天看到一个比较感兴趣的观点，就是将`function`当作对象工厂，使用箭头函数来实现函数。
-
 给出定义：**结果链表**の`result`、**链表节点**の`listNode`、**输入链表**の`l1`与`l2`。
 
 注意链表的结构性，自然想到将两个链表的对应的每一位数字相加，判断是否有进位，并因此`new`一个`listNode`，用于存放每次相加的**个位**运算结果，并链接到<u>结果链表</u>。
@@ -111,3 +109,53 @@ Memory Usage:  **38.4 MB**
 
 Status:  **Accepted**
 
+## 改良
+
+在思想一致的情况下，需要尽可能的减少逻辑判断分支。
+
+可以看到我的代码实在是太丑陋了。
+
+我们完全可以通过引用“指针”来控制返回。
+
+你需要知道的是：
+
+1. 在JavaScript中，原始对象`Number`通过值传递，而对象`Object`通过引用传递。
+2. 你可以尝试将`function`看作一个对象工厂，于是，你就拥有了对象，也就拥有了“指针”。
+3. 三元表达式`a?(b,c):d`比`if else`[花费更少的时间](http://www.cnblogs.com/GavinYoung/archive/2010/05/19/1739062.html)。
+
+```javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+    let result=new ListNode(0);
+    let p=l1,q=l2,current=result,carry=0;
+    while(p!=null||q!=null){
+        let a=(p==null)?0:p.val;
+        let b=(q==null)?0:q.val;
+        let sum=a+b+carry;
+        (sum<10)?carry=0:carry=1;
+        current.next=new ListNode(sum%10);
+        current=current.next;
+        (p==null)?null:p=p.next;
+        (q==null)?null:q=q.next;
+    }
+    carry?current.next=new ListNode(1):null;
+    return result.next;
+};
+```
+
+Runtime:  **120 ms**
+
+Memory Usage:  **38.3 MB**
+
+Status:  **Accepted**

@@ -10,7 +10,7 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
+var addTwoNumbers_worst = function(l1, l2) {
     let carry=0,result=0,list=new ListNode(0);
     let that=list;
     while(l1&&l2){
@@ -60,4 +60,20 @@ var addTwoNumbers = function(l1, l2) {
         carry?list.next=new ListNode(1):list.next=null;
     }
     return that;
+};
+var addTwoNumbers_best = function(l1, l2) {
+    let result=new ListNode(0);
+    let p=l1,q=l2,current=result,carry=0;
+    while(p!=null||q!=null){
+        let a=(p==null)?0:p.val;
+        let b=(q==null)?0:q.val;
+        let sum=a+b+carry;
+        (sum<10)?carry=0:carry=1;
+        current.next=new ListNode(sum%10);
+        current=current.next;
+        (p==null)?null:p=p.next;
+        (q==null)?null:q=q.next;
+    }
+    carry?current.next=new ListNode(1):null;
+    return result.next;
 };
