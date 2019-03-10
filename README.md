@@ -1,9 +1,9 @@
 # LeetCode In JavaScript
-好烦躁，在LeetCode上刷会儿题吧。
+去LeetCode上蹭点题吧。
 
 算法小白，用Javascript实现。
 
-我好白痴哇。
+跑啊啊啊啊啊啊啊啊啊啊。
 
 ![跑啊](https://raw.githubusercontent.com/C1erman/Graph-bed/master/imgs/1st/one1.jpg)
 
