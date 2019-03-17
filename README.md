@@ -1,7 +1,5 @@
 # LeetCode In JavaScript
-去LeetCode上蹭点题吧。
-
-Javascript实现。
+去LeetCode上蹭点题吧。Javascript实现。
 
 跑啊啊啊啊啊啊啊啊啊啊。
 
