@@ -98,9 +98,11 @@ var is_p=(s)=>{
 
 如何从返回的长度来计算出来最长的回文子串呢？
 
-通过两个标识符`start`、`end`，每次循环时我们总是假设当前的`i`为中心，每次做完两次判断后取最大的值，因为我们不知道取得的回文字符串长度的奇偶性，因此取`start=Math.round(i-(len-1)/2),end=i+len/2`。
+通过两个标识符`start`、`end`，每次循环时我们总是假设当前的`i`为中心，每次做完两次判断（奇、偶）后取最大的返回值，因为我们不知道取得的回文字符串长度的奇偶性，因此取`start=Math.round(i-(len-1)/2),end=i+len/2`。
 
-注意这个`Math.round()`!因为在`JavaScript`中`String.substring(1.5)-->String.substring(1)`。
+注意这个`Math.round()`!因为在`JavaScript`中`String.substring(1.5)-->String.substring(1)`。但是由于我们已经将`len-1`：如果回文子串的长度为偶数，那么中心左边的长度会比右边少一位。因此为了避免出现`0.5=1`，即多取一位的情况，我们使用了`Math.round()`这个四舍五入的函数。
+
+![Math.round()](https://raw.githubusercontent.com/C1erman/Graph-bed/master/imgs/For%20LeetCode/p5-another-arrow.png)
 
 ```javascript
 /**
@@ -127,3 +129,21 @@ var aroundStr=(s,start,end)=>{
     return r-l-1;
 }
 ```
+
+Runtime:  **92 ms**
+
+Memory Usage:  **36.2 MB**
+
+Status:  **Accepted**
+
+faster than **87.69%** of JavaScript online submissions
+
+less than **74.14%** of JavaScript online submissions
+
+### Manacher算法
+
+又叫马拉车 = =
+
+是查找最长回文子串的**线性方法**，好厉害！
+
+ 
