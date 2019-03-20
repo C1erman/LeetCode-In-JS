@@ -253,5 +253,3 @@ Status:  **Accepted**
 faster than **99.16%** of JavaScript online submissions
 
 less than **57.76%** of JavaScript online submissions
-
- 
