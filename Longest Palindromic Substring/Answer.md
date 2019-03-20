@@ -146,4 +146,112 @@ less than **74.14%** of JavaScript online submissions
 
 是查找最长回文子串的**线性方法**，好厉害！
 
+#### 变身
+
+考虑输入字符串长度的奇偶性干嘛呀，想一想计算偶数回文字符串时的下标计算是多么的让人难受，于是，为何不在每个字符的周围添上一个罕见的字符，使它变成奇数长度呢？
+
+比如这样：`#a#b#b#`
+
+这样，长度就变成`(n-1+2)+n=2n+1`的奇数长度了。
+
+#### 一个特性
+
+现在我们来考虑一个重要的**数组**——与处理后的字符串长度相同、每一位存放着对应字符的**扩展半径**。
+
+对于上述字符串`#a#b#b#`，对应的数组为`0101210`。
+
+为什么这个数组比较重要呢？
+
+以`a`举例，它在原字符串中的位置是`0`，在新字符串中的位置是`1`，它的扩展半径为`1`。
+
+好了，我们现在掌握的信息是一个字符`x`在新字符串的下标`index_new`，以它为中心所扩展的回文串长度`len`，我们怎么求出`x`在原字符串的**起始下标**（回文子串的起始位置）`index_old`呢？
+
+这就是马拉车中的一个特性了：`index_old=(index_new-len)/2`。
+
+其实，呃。
+
+因为`#`存在的缘故，因此我们要除以2。
+
+![特性](https://raw.githubusercontent.com/C1erman/Graph-bed/master/imgs/For%20LeetCode/p5-last-arrow.png)
+
+#### 实现
+
+马拉车算法的精髓在于以**线性时间**计算出这个数组。
+
+就像[KMP算法](https://blog.csdn.net/Clerman/article/details/72373335)一样，它充分利用了我们之前计算出的结果，并且由于回文子串的**镜像特性**，我们可以将计算数组的方式简化。
+
+暂时无法透彻的理解这个算法，属于半懂不懂的程度，等下一轮再看看。
+
+[他山之石](http://www.cnblogs.com/grandyang/p/4475985.html)。
+
+```javascript
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+    // 首先插入一个#
+    let newstr = fillWithSharp(s);
+    // 以newStr每个字符串为中心的回文串的长度数组，最小为1
+    let len = [];
+    // 最长的回文串的右端点
+    let longestPalindromeRight = 0;
+    // 最长的回文串的中心点
+    let longestPalindromeCenter = 0;
+    // 记录最长回文长度
+    let longestPalindrome = 0;
+    //计算数组
+    for(let i=0;i<newstr.length;i++) {
+        let needExpand = true;
+        let spandStart = i+1;
+        // 在右边界内的时候寻找对称点
+        if(i<longestPalindromeRight) {
+            // 找关于中心的对称点j
+            const j = 2*longestPalindromeCenter - i;
+            // 如果这时候还在右边界内，则不需要扩展
+            if(longestPalindromeRight >= i + len[j] ) {
+                len[i] = len[j];
+                needExpand = false
+            } else {
+                spandStart = longestPalindromeRight + 1
+            }
+        }
+        // 这里是拓展的代码
+        if(needExpand) {
+            // 这里雷同上面的single拓展
+            while(spandStart<newstr.length && 2*i-spandStart>=0) {
+                if(newstr[spandStart] === newstr[2*i-spandStart]) {
+                    spandStart++
+                } else {
+                    break
+                }
+            }
+        }
+        len[i] = spandStart - i;
+        if(len[i]>longestPalindrome) {
+            longestPalindromeRight = spandStart - 1;
+            longestPalindrome = len[i];
+            longestPalindromeCenter = i;
+        }
+    }
+    // 找到len中的最大值索引
+    const originRight = longestPalindromeRight / 2;
+    const originLongestPalindrome = longestPalindrome - 1;
+    return s.substr(originRight-originLongestPalindrome,originLongestPalindrome)
+};
+var fillWithSharp=(s)=>{
+    return String.prototype.concat('#',s.split('').join('#'),'#');
+}
+```
+
+Runtime:  **68 ms**
+
+Memory Usage:  **37.3 MB**
+
+Status:  **Accepted**
+
+faster than **99.16%** of JavaScript online submissions
+
+less than **57.76%** of JavaScript online submissions
+
  
