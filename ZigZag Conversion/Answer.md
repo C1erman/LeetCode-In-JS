@@ -62,7 +62,7 @@ P     I
 
 就像下图这样：
 
-![示例](https://raw.githubusercontent.com/C1erman/Graph-bed/master/imgs/For%20LeetCode/p6-idea.png)
+![示例](https://raw.githubusercontent.com/C1erman/Graph-bed/master/imgs/For%20LeetCode/leetCode-p6-1.png)
 
 ~~我想画画，不，你不想.jpg~~
 
@@ -130,3 +130,52 @@ less than **64.62%** of JavaScript online submissions
 2. 执行`[a].push[b]`的内存消耗
 
 假设`2`比`1`大，才会有用数组的每一项中存放字符串。
+
+### 遍历所有字符
+
+这种方法的思想就是：通过遍历给定字符串，将每一个字符拼接到合适的位置。
+
+通过一个变量来控制当前要拼接到`Array`的哪一个元素，通过另一个变量来控制`Array`的访问方向（不使用对称的特性）。
+
+就像这样：
+
+![图示](https://raw.githubusercontent.com/C1erman/Graph-bed/master/imgs/For%20LeetCode/leetCode-p6-2.png)
+
+```javascript
+/**
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+var convert = function(s, numRows) {
+    if(numRows==1) return s;
+    let len=s.length;
+    let ans=new Array(Math.min(numRows,len));
+    ans.fill('');
+    let down=false;
+    let current_row=0;
+    for(let c of s){
+        ans[current_row]+=c;
+        (current_row==0||current_row==numRows-1)?down=!down:null;
+        down?current_row++:current_row--;
+    }
+    return ans.join('');
+};
+```
+
+值得注意的是，这里通过使用`Math.min(numRows,s.length)`来创建最小`Array`，避免了资源的消耗。
+
+Runtime:  **96 ms**
+
+Memory Usage:  **38.1 MB**
+
+Status:  **Accepted**
+
+faster than **89.84%** of JavaScript online submissions
+
+less than **88.46%** of JavaScript online submissions
+
+## 学到的
+
+1. 对于`String`来说，使用`for...in`得到的是各个`index`，使用`for...of`得到的是各个`value`
+2. 获取一个下标为`i`的字符关于字符串中心对称的公式为：`i<-->length-i-1`
