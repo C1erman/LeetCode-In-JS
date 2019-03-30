@@ -4,4 +4,3 @@
 啊啊啊啊啊啊啊啊啊啊。
 
 ![跑啊](https://raw.githubusercontent.com/C1erman/Graph-bed/master/imgs/1st/one1.jpg)
-

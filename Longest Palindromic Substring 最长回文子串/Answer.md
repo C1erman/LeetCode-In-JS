@@ -7,15 +7,15 @@
 Given a string **s**, find the longest palindromic substring in **s**. You may assume that the maximum length of **s** is 1000.
 
 > Example
->
-> ```
-> Input: "babad"
-> Output: "bab"
-> Note: "aba" is also a valid answer.
-> 
-> Input: "cbbd"
-> Output: "bb"
-> ```
+
+```
+Input: "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+
+Input: "cbbd"
+Output: "bb"
+```
 
 ## 思路
 
@@ -34,6 +34,8 @@ Given a string **s**, find the longest palindromic substring in **s**. You may a
 ![图示](https://raw.githubusercontent.com/C1erman/Graph-bed/master/imgs/For%20LeetCode/p5-arrow.png)
 
 注意到**滑动窗口**滑到给定字符串的最后时，也就是一轮次的查询结束、指针`j==n`时，需要缩短滑动窗口的长度，并将滑动窗口置于给定字符串的最前端。但这个时候，你需要先做一次额外的判断——否则你会少判断一次，就是在**滑动窗口**滑到最后时，先做一次回文判断，在改变滑动窗口的**长度**和**位置**。
+
+滑动窗口~
 
 ## 实现
 
