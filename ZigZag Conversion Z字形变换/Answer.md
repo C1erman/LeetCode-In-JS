@@ -178,4 +178,4 @@ less than **88.46%** of JavaScript online submissions
 ## 学到的
 
 1. 对于`String`来说，使用`for...in`得到的是各个`index`，使用`for...of`得到的是各个`value`
-2. 获取一个下标为`i`的字符关于字符串中心对称的公式为：`i<-->length-i-1`
+2. 获取一个下标为`i`的字符关于字符串中心对称的公式为：`i<-->length-i-1`              
